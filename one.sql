@@ -14,4 +14,39 @@ USE employees;
 select * from memberTBL;
 create table indexTBL(first_name varchar(14), last_name varchar(16),hire_date date);
 insert into indexTBL(select first_name,last_name,hire_date from employees.employees LIMIT 500);
-select * from indexTBL;
+select * from indexTBL where first_name='Mary';
+create index idx_indexTBL_firstname On indexTBL(first_name);
+select * from indexTBL where first_name='Mary';
+
+DELIMITER //
+create procedure myProc() 
+begin 
+	select * from memberTBL where memberName='토마스';
+	select * from productTBL where productName='냉장고';
+	select * from productTBL;
+    select * from memberTBL;
+
+END //
+DELIMITER ;
+call myProc;
+Create table deletedMemberTBL
+(
+memberID char(8),
+memberName char(5),
+memberAddress char(20),
+deletedDate date);
+
+insert into memberTBL Values('Soccer','흥민','서울시 서대문구 북가좌동');
+Delete from memberTBL WHERE memberName='흥민';
+DELIMITER //
+create trigger trg_deletedMemberTBL
+AFTER DELETE
+ON memberTBL
+for EACH ROW
+begin
+insert into deletedMemberTBL
+	values(deleteMemberTBL.memrberID,deleteMemberTBL.memberName,deleteMemberTBL.memberAddress, CURDATE());
+    end //
+    DELIMITER ;
+    
+    select*from deleteMemberTBL;
