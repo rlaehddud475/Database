@@ -45,7 +45,7 @@ ON memberTBL
 for EACH ROW
 begin
 insert into deletedMemberTBL
-	values(deleteMemberTBL.memrberID,deleteMemberTBL.memberName,deleteMemberTBL.memberAddress, CURDATE());
+	values(OLD.memberID,OLD.memberName,OLD.memberAddress, CURDATE());
     end //
     DELIMITER ;
     
