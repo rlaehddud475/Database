@@ -48,3 +48,5 @@ INSERT INTO buyTBL valueS(NULL,'LHJ','청바지','의류',50,1);
 INSERT INTO buyTBL valueS(NULL,'PSH','운동화',NULL,30,2);
 INSERT INTO buyTBL valueS(NULL,'LHJ','책','서적',15,1);
 INSERT INTO buyTBL valueS(NULL,'PSH','운동화',NULL,30,2);
+
+SELECT * FROM buyTBL;
