@@ -182,7 +182,22 @@ SELECT * FROM abc ORDER BY total DESC;
 
 
 
+select userID as '사용자',sum(price*amount) as '총구매액' from buytbl group by userID order by sum(price*amount) desc;
 
+with abc(userID, total) as(select userID as '사용자',sum(price*amount) as '총구매액' from buytbl group by userID )select * from abc order by total desc;
+
+
+-- 1단계 : 각 지역별로 키가 큰 사람을 뽑는 쿼리
+select addr,max(height) from usertbl group by addr;
+
+-- 2단계 : 위 쿼리르ㅡㄹ with문으로 묶는다
+with cte_usertbl(addr, maxHeight) as(select addr, max(height) from usertbl group by addr)
+
+-- 3단계 : 키평균을 구하는 쿼리를 작성한다.
+select avg(height) from usertbl;
+
+-- 4단계 : 2단계와 3단계쿼리를 합친다. 키의 평균을 실수로 만들기위해 1.0을 곲하여 실수로 반환한다.
+with cte_usertbl(addr, maxHeight) as(select addr, max(height) from usertbl group by addr)select avg(maxHeight*1.0) as '각 지역별 최고키의 평균' from cte_usertbl;
 
 
 
