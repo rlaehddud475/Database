@@ -142,6 +142,8 @@ RIGHT OUTER JOIN userTBL U
 ON B.userID = U.userID
 GROUP BY U.userID, U.userName
 ORDER BY sum(price*amount) DESC;
+
+
 -- </실습 8-4> 
 
 
